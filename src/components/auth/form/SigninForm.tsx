@@ -64,7 +64,7 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full mx-auto">
       <AuthHeader
         title="Welcome Back!"
         description="Log in to upload your files and get precise estimates in seconds."
@@ -127,7 +127,7 @@ export default function SignInForm() {
           <Button
             type="submit"
             variant={"default"}
-            className="w-full"
+            className="w-full mt-4"
             disabled={isLoading}
           >
             <div className="flex flex-row gap-2">

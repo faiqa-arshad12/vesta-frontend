@@ -65,7 +65,7 @@ export default function SignUpForm() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full mx-auto">
       <AuthHeader
         title="Create Account"
         description="Sign up to upload your files and get precise estimates in seconds."
@@ -135,12 +135,12 @@ export default function SignUpForm() {
           <Button
             type="submit"
             variant={"default"}
-            className="w-full"
+            className="w-full mt-4"
             disabled={isLoading}
           >
             <div className="flex flex-row gap-2">
               <span className="font-bold text-[18px] text-white">
-                {isLoading ? "Signing up..." : "Signup"}
+                {isLoading ? "Signing up..." : "Sign Up"}
               </span>
               {!isLoading && <ArrowRight className="mt-1" />}
             </div>
