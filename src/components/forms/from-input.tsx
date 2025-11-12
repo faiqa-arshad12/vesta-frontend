@@ -80,7 +80,7 @@ function FormInput<
                     field.onChange(e.target.value);
                   }
                 }}
-                className={`bg-white border-input h-[42px] w-full rounded-[8px] placeholder:text-secondary placeholder:text-[16px] ${
+                className={`bg-white border-input h-[48px] w-full rounded-[8px] placeholder:text-secondary placeholder:text-[16px] ${
                   isPasswordType ? "pr-10" : ""
                 } ${inputClassName || ""}`}
               />

@@ -26,7 +26,7 @@ export default function SignInForm() {
     },
   });
 
-  const onSubmit = async (data: SignInFormValues) => {
+  const onSubmit = async (_data: SignInFormValues) => {
     setIsLoading(true);
     setError(null);
 
@@ -71,7 +71,7 @@ export default function SignInForm() {
       />
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} >
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           {/* Google Sign-in Button */}
           <Button
             type="button"

@@ -13,7 +13,7 @@ export default function Logo() {
           className="object-contain w-6 h-6 sm:w-8 sm:h-8"
         />
         <span className="text-white text-lg sm:text-xl md:text-[24px] font-bold whitespace-nowrap">
-          Vesta
+          VESTA
         </span>
       </div>
     </Link>

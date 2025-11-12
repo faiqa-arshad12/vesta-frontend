@@ -13,7 +13,8 @@ export interface InputFieldProps extends React.ComponentProps<typeof Input> {
 
 const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, labelClassName, containerClassName, className, id, ...props }, ref) => {
-    const inputId = id || React.useId()
+    const generatedId = React.useId()
+    const inputId = id || generatedId
 
     return (
       <div className={cn("w-full space-y-2", containerClassName)}>
