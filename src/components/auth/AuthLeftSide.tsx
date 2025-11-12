@@ -13,7 +13,7 @@ export default function AuthLeftSide({
   totalSlides = 3,
 }: AuthLeftSideProps) {
   return (
-    <div className="hidden lg:flex lg:w-[50%] relative  overflow-hidden px-4">
+    <div className="hidden lg:flex lg:w-[50%] relative  overflow-hidden p-6">
       <div className="absolute inset-6 z-0 rounded-[32px] overflow-hidden">
         <Image
           src="/assets/images/Bg.jpg"

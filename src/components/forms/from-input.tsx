@@ -1,6 +1,8 @@
 "use client";
 
+import {useState} from "react";
 import {FieldPath, FieldValues} from "react-hook-form";
+import {Eye, EyeOff} from "lucide-react";
 import {
   FormControl,
   FormDescription,
@@ -42,6 +44,10 @@ function FormInput<
   className,
   inputClassName,
 }: FormInputProps<TFieldValues, TName>) {
+  const [showPassword, setShowPassword] = useState(false);
+  const isPasswordType = type === "password";
+  const inputType = isPasswordType && showPassword ? "text" : type;
+
   return (
     <FormField
       control={control}
@@ -55,26 +61,45 @@ function FormInput<
             </FormLabel>
           )}
           <FormControl>
-            <Input
-              type={type}
-              placeholder={placeholder}
-              step={step}
-              min={min}
-              max={max}
-              disabled={disabled}
-              {...field}
-              onChange={(e) => {
-                if (type === "number") {
-                  const value = e.target.value;
-                  field.onChange(value === "" ? undefined : parseFloat(value));
-                } else {
-                  field.onChange(e.target.value);
-                }
-              }}
-              className={`bg-white border-input h-[42px] w-full  rounded-[8px] placeholder:text-secondary placeholder:text-[16px] ${
-                inputClassName || ""
-              }`}
-            />
+            <div className="relative">
+              <Input
+                type={inputType}
+                placeholder={placeholder}
+                step={step}
+                min={min}
+                max={max}
+                disabled={disabled}
+                {...field}
+                onChange={(e) => {
+                  if (type === "number") {
+                    const value = e.target.value;
+                    field.onChange(
+                      value === "" ? undefined : parseFloat(value)
+                    );
+                  } else {
+                    field.onChange(e.target.value);
+                  }
+                }}
+                className={`bg-white border-input h-[42px] w-full rounded-[8px] placeholder:text-secondary placeholder:text-[16px] ${
+                  isPasswordType ? "pr-10" : ""
+                } ${inputClassName || ""}`}
+              />
+              {isPasswordType && (
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary hover:text-foreground transition-colors"
+                  disabled={disabled}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              )}
+            </div>
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <div className="min-h-[20px]">
