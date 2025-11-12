@@ -37,8 +37,8 @@ export function ProcessingModal({open, onClose}: ProcessingModalProps) {
             Processing Your File
           </DialogTitle>
           <DialogDescription className="text-base text-muted pt-2 text-center">
-            We&apos;re analyzing your document to generate accurate estimates. You&apos;ll
-            get a notification when it&apos;s complete.
+            We&apos;re analyzing your document to generate accurate estimates.
+            You&apos;ll get a notification when it&apos;s complete.
           </DialogDescription>
         </DialogHeader>
 

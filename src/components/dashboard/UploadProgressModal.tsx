@@ -145,7 +145,10 @@ export function UploadProgressModal({
   return (
     <>
       <Dialog open={open} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-[600px] rounded-xl" showCloseButton={false}>
+        <DialogContent
+          className="sm:max-w-[600px] rounded-xl"
+          showCloseButton={false}
+        >
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-foreground">
               Uploading...
