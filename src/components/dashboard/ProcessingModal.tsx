@@ -14,9 +14,10 @@ import Image from "next/image";
 interface ProcessingModalProps {
   open: boolean;
   onClose: () => void;
+  title?: string;
 }
 
-export function ProcessingModal({open, onClose}: ProcessingModalProps) {
+export function ProcessingModal({open, onClose, title}: ProcessingModalProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
@@ -34,7 +35,7 @@ export function ProcessingModal({open, onClose}: ProcessingModalProps) {
         </div>
         <DialogHeader className="items-center text-center">
           <DialogTitle className="text-2xl font-bold text-foreground">
-            Processing Your File
+            {title || "Processing Your File"}
           </DialogTitle>
           <DialogDescription className="text-base text-muted pt-2 text-center">
             We&apos;re analyzing your document to generate accurate estimates.

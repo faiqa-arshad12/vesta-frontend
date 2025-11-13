@@ -1,8 +1,10 @@
 "use client";
 
-import {useState, useEffect} from "react";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
+import {PdfViewrs} from "./PdfOpen";
+import {ProcessingModal} from "@/components/dashboard/ProcessingModal";
+import {useState} from "react";
 
 interface PdfViewerProps {
   fileName: string;
@@ -17,49 +19,43 @@ export function PdfViewer({
   fileId: _fileId,
   pages: _pages = 10,
   pdfUrl,
-  onRegenerate,
+  onRegenerate:_onRegenerate,
 }: PdfViewerProps) {
-  const [currentPage, _setCurrentPage] = useState(1);
-  const defaultPdfUrl = pdfUrl || "https://icseindia.org/document/sample.pdf";
-  useEffect(() => {
-    const iframe = document.getElementById("pdf-viewer") as HTMLIFrameElement;
-    if (iframe) {
-      iframe.src = `${defaultPdfUrl}#page=${currentPage}&toolbar=1`;
-    }
-  }, [currentPage, defaultPdfUrl]);
+  const [processingModalOpen, setProcessingModalOpen] = useState(false);
+  const handleProcessingClose = () => {
+    setProcessingModalOpen(false);
+  };
 
   return (
-    <div className="flex flex-col bg-white h-full w-full">
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100 bg-white flex-shrink-0 shadow-sm">
-        <div className="flex items-center gap-2 text-sm">
+    <div className="flex flex-col h-full">
+      <div className="flex items-center flex-col md:flex-row md:justify-between p-6 gap-5 flex-shrink-0">
+        <div className="flex items-center gap-2 text-[18px] md:text-[24px]">
           <Link
             href="/dashboard"
-            className="text-primary hover:text-primary/80 transition-colors font-medium"
+            className="text-muted hover:text-primary/80 transition-colors font-medium"
           >
             Home
           </Link>
-          <span className="text-gray-400">&gt;</span>
+          <span className="text-foreground font-medium">/</span>
           <span className="text-foreground font-medium">{fileName}</span>
         </div>
         <Button
-          onClick={onRegenerate}
-          className="bg-primary text-white hover:bg-primary/90 px-4 py-2 text-sm font-medium rounded-md"
-          type="button"
+          onClick={() => {
+            setProcessingModalOpen(true);
+          }}
+          variant={"default"}
+          className="text-[18px] w-full md:w-auto "
         >
           Regenerate Estimate
         </Button>
       </div>
 
-      <div className="flex flex-1 overflow-hidden min-h-0">
-        <div className="flex-1 overflow-hidden min-h-0">
-          <iframe
-            id="pdf-viewer"
-            src={`${defaultPdfUrl}#page=${currentPage}&toolbar=1`}
-            className="w-full h-full border-0 min-h-0"
-            title={fileName}
-          />
-        </div>
-      </div>
+      <PdfViewrs pdfUrl={pdfUrl} fileName={fileName} />
+      <ProcessingModal
+        open={processingModalOpen}
+        title="Re- Processing Your File"
+        onClose={handleProcessingClose}
+      />
     </div>
   );
 }
