@@ -6,9 +6,9 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({children}: DashboardLayoutProps) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col">
       <DashboardHeader />
-      <main className="w-full">{children}</main>
+      <main className="w-full flex-1 min-h-0">{children}</main>
     </div>
   );
 }

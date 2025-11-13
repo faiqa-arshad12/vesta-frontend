@@ -15,7 +15,7 @@ export default function AuthLayout({
     <div className="min-h-screen flex">
       <AuthLeftSide currentSlide={currentSlide} totalSlides={totalSlides} />
 
-      <div className="flex-1 flex items-center justify-center bg-white p-8 max-w-auto">
+      <div className="flex-1 flex items-center justify-center bg-white p-8 max-w-auto px-12">
         {children}
       </div>
     </div>

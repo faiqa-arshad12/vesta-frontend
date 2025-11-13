@@ -2,7 +2,14 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
+body {
+  @apply !min-w-full;
+}
+html {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-size: 85%;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -39,11 +46,13 @@
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
+  --color-dashed-border: var(--dashed-border);
   --color-orange-muted: var(--orange-muted);
   --color-success-green: var(--success-green);
   --color-gray-text: var(--gray-text);
   --color-text-black: var(--text-black);
   --color-card-foreground: var(--card-foreground);
+  --color-destructive-muted: var(--destructive-muted);
   --color-card: var(--card);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -71,8 +80,10 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #d92d20;
+  --destructive-muted: #d92d201a;
   --border: oklch(0.922 0 0);
+  --dashed-border: #c7c7c7;
   --gray-text: #343a3e;
   --text-black: #11181c;
   --input: #d6d5da;

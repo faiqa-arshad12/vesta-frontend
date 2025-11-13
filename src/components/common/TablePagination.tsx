@@ -22,16 +22,13 @@ export function TablePagination({
     const maxVisible = 7;
 
     if (totalPages <= maxVisible) {
-      // Show all pages if total is less than max visible
       for (let i = 1; i <= totalPages; i++) {
         pages.push(i);
       }
     } else {
-      // Always show first page
       pages.push(1);
 
       if (currentPage <= 3) {
-        // Show first few pages
         for (let i = 2; i <= 4; i++) {
           pages.push(i);
         }
@@ -39,7 +36,6 @@ export function TablePagination({
         pages.push(totalPages - 1);
         pages.push(totalPages);
       } else if (currentPage >= totalPages - 2) {
-        // Show last few pages
         pages.push(2);
         pages.push("...");
         for (let i = totalPages - 3; i <= totalPages; i++) {
@@ -72,7 +68,7 @@ export function TablePagination({
         size="icon"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="h-8 w-8 border border-gray-border"
+        className="h-8 w-8 border border-gray-border cursor-pointer"
         aria-label="Previous page"
       >
         <ChevronLeft className="h-4 w-4" />
@@ -97,9 +93,9 @@ export function TablePagination({
               key={pageNumber}
               onClick={() => onPageChange(pageNumber)}
               className={cn(
-                "h-8 min-w-8 px-3 cursor-pointer",
+                "h-8 min-w-8 px-3 cursor-pointer rounded-[8px] flex items-center",
                 currentPage === pageNumber
-                  ? " text-gray-foreground hover:bg-gray-100"
+                  ? " text-gray-foreground hover:bg-gray-100 "
                   : "text-muted hover:bg-gray-100"
               )}
               aria-label={`Go to page ${pageNumber}`}
@@ -116,7 +112,7 @@ export function TablePagination({
         size="icon"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="h-8 w-8 border border-gray-border"
+        className="h-8 w-8 border border-gray-border cursor-pointer"
         aria-label="Next page"
       >
         <ChevronRight className="h-4 w-4" />

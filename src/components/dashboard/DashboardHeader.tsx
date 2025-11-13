@@ -21,7 +21,7 @@ export function DashboardHeader() {
       <div className="flex-shrink-0">
         <Logo />
       </div>
-      <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+      <div className="flex items-center gap-1 sm:gap-2">
         <div
           className="text-white hover:bg-white/10 p-1.5 sm:p-2 rounded-lg cursor-pointer transition-colors"
           aria-label="Notifications"
@@ -29,16 +29,6 @@ export function DashboardHeader() {
           <Icon
             icon="hugeicons:notification-square"
             className="w-5 h-5 sm:w-6 sm:h-6"
-          />
-        </div>
-
-        <div
-          className="text-white hover:bg-white/10 p-1.5 sm:p-2 rounded-lg cursor-pointer transition-colors"
-          aria-label="Settings"
-        >
-          <Icon
-            icon="hugeicons:account-setting-02"
-            className="w-5 h-5 sm:w-6 sm:h-6 text-white"
           />
         </div>
 

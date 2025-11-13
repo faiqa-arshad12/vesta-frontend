@@ -13,6 +13,7 @@ interface FileTableWithPaginationProps {
   onDelete?: (id: string) => void;
   onView?: (id: string) => void;
   onSelect?: (selectedIds: string[]) => void;
+  onUpload?: () => void;
   className?: string;
 }
 
@@ -22,6 +23,7 @@ export function FileTableWithPagination({
   onDelete,
   onView,
   onSelect,
+  onUpload,
   className,
 }: FileTableWithPaginationProps) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,7 +40,6 @@ export function FileTableWithPagination({
     setCurrentPage(page);
   };
 
-  // Reset to page 1 if current page is out of bounds
   if (currentPage > totalPages && totalPages > 0) {
     setCurrentPage(1);
   }
@@ -46,10 +47,11 @@ export function FileTableWithPagination({
   return (
     <div className={className}>
       <FileTable
-        files={paginatedFiles}
+        files={files.length === 0 ? [] : paginatedFiles}
         onDelete={onDelete}
         onView={onView}
         onSelect={onSelect}
+        onUpload={onUpload}
       />
       {totalPages > 1 && (
         <TablePagination
