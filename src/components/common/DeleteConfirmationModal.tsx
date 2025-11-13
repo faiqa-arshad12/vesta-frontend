@@ -29,7 +29,7 @@ export function DeleteConfirmationModal({
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
-        className="w-auto space-y-6 py-8 rounded-xl !px-6"
+        className="sm:max-w-[500px]  space-y-4 py-8 rounded-xl"
         showCloseButton={false}
       >
         <div className="flex flex-row items-center justify-center">
@@ -52,7 +52,7 @@ export function DeleteConfirmationModal({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex-start flex justify-between flex-row">
+        <div className=" flex md:flex-row flex-col md:justify-between gap-3">
           <Button
             type="button"
             variant="outline"

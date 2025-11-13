@@ -149,48 +149,53 @@ export function UploadProgressModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="w-auto rounded-xl" showCloseButton={false}>
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">
+      <DialogContent
+        className="w-[95vw] max-w-lg sm:w-full rounded-xl mx-4 sm:mx-auto overflow-hidden"
+        showCloseButton={false}
+      >
+        <DialogHeader className="px-0 sm:px-0">
+          <DialogTitle className="text-xl sm:text-2xl font-bold">
             {overallProgress > 0 ? "Uploading..." : "Preparing Upload..."}
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
+        <div className="space-y-4 sm:space-y-6 py-2 sm:py-4 overflow-hidden">
           {/* Overall Progress Section */}
           <div className="space-y-2">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
               <Progress
                 value={overallProgress}
-                className="flex-1 h-2 bg-gray-200"
+                className="flex-1 h-2 bg-gray-200 min-w-0"
               />
-              <span className="text-sm font-medium text-gray-500 min-w-[32px]">
+              <span className="text-xs sm:text-sm font-medium text-gray-500 min-w-[28px] sm:min-w-[32px] text-right flex-shrink-0">
                 {overallProgress}%
               </span>
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-xs sm:text-sm text-gray-600">
               Only support .Doc, .csv and .pdf
             </p>
           </div>
 
           {/* File List */}
-          <div className="space-y-3 max-h-64 overflow-y-auto">
+          <div className="space-y-2 sm:space-y-3 max-h-48 sm:max-h-64 overflow-y-auto overflow-x-hidden">
             {uploadFiles.map((file) => (
               <div
                 key={file.id}
-                className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-colors min-w-0 w-full overflow-hidden"
               >
                 {/* PDF Icon */}
-                <div className="flex-shrink-0 w-10 h-10 bg-red-600 rounded flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">PDF</span>
+                <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-red-600 rounded flex items-center justify-center">
+                  <span className="text-white text-[10px] sm:text-xs font-bold">
+                    PDF
+                  </span>
                 </div>
 
                 {/* File Info */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900 truncate">
+                <div className="flex-1 min-w-0 overflow-hidden">
+                  <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">
                     {file.name}
                   </p>
-                  <p className="text-xs text-gray-600 mt-0.5">
+                  <p className="text-[10px] sm:text-xs text-gray-600 mt-0.5 truncate">
                     {formatFileSize(file.size)} - {Math.round(file.progress)}%
                     {file.progress < 100 ? " uploaded" : " completed"}
                   </p>
@@ -199,7 +204,7 @@ export function UploadProgressModal({
                 {/* Loading Spinner */}
                 {file.progress < 100 && (
                   <div className="flex-shrink-0 text-teal-600">
-                    <CircularProgress progress={file.progress} size={32} />
+                    <CircularProgress progress={file.progress} size={28} />
                   </div>
                 )}
               </div>
@@ -207,12 +212,12 @@ export function UploadProgressModal({
           </div>
         </div>
 
-        <DialogFooter className="gap-3">
+        <DialogFooter className="flex-col sm:flex-row gap-2 sm:gap-3 px-0 sm:px-0">
           <Button
             type="button"
             variant="outline"
             onClick={onCancel}
-            className="px-6 bg-transparent"
+            className="w-full sm:w-auto px-4 sm:px-6 bg-transparent"
           >
             Cancel
           </Button>
@@ -220,7 +225,7 @@ export function UploadProgressModal({
             type="button"
             onClick={onNext}
             disabled={isUploading || overallProgress !== 100}
-            className="gap-2 px-6"
+            className="w-full sm:w-auto gap-2 px-4 sm:px-6"
           >
             Next
             <ArrowRight className="w-4 h-4" />

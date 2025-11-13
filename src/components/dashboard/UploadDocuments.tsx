@@ -108,10 +108,10 @@ export function UploadDocuments({
       onDrop={handleDrop}
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 md:gap-6">
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 rounded-[12px] bg-[#F6F6F6] p-4">
           <Icon
             icon="hugeicons:files-01"
-            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 color-[#101010]"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-black font-normal"
           />
         </div>
 
@@ -133,7 +133,7 @@ export function UploadDocuments({
         </div>
 
         {/* Choose File Button */}
-        <div className="flex-shrink-0 w-full sm:w-auto">
+        <div className="w-full sm:w-auto">
           <input
             ref={fileInputRef}
             type="file"
@@ -147,7 +147,7 @@ export function UploadDocuments({
             variant={"default"}
             className="w-full"
           >
-            <Icon icon="hugeicons:upload-04" width="48" height="48" />{" "}
+            <Icon icon="hugeicons:upload-04" width="48" height="48" />
             <span>Choose File</span>
           </Button>
         </div>
