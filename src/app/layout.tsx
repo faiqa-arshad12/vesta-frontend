@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import {Toaster} from "sonner";
+import {SessionProvider} from "@/components/providers/SessionProvider";
 
 const sansation = localFont({
   src: [
@@ -51,8 +52,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sansation.variable} font-sans antialiased`}>
-        {children}
-        <Toaster />
+        <SessionProvider>
+          {children}
+          <Toaster />
+        </SessionProvider>
       </body>
     </html>
   );

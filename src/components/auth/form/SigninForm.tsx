@@ -2,54 +2,68 @@
 
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-// import {useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {useState} from "react";
-
+import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import {ArrowRight} from "lucide-react";
-import Image from "next/image";
 import {FormInput} from "@/components/forms/from-input";
 import {Form} from "@/components/ui/form";
 import {signInSchema, type SignInFormValues} from "@/schemas/auth";
 import {AuthHeader} from "@/components/auth/AuthHeader";
+import {signIn} from "next-auth/react";
 
 export default function SignInForm() {
-  //   const router = useRouter();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
+    mode: "onBlur",
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = async (_data: SignInFormValues) => {
+  const onSubmit = async (data: SignInFormValues) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      //   const result = await signIn("credentials", {
-      //     email: data.email,
-      //     password: data.password,
-      //     redirect: false,
-      //   });
-      //   if (result?.error) {
-      //     setError("Invalid email or password. Please try again.");
-      //     setIsLoading(false);
-      //   } else if (result?.ok) {
-      //     router.push("/dashboard");
-      //     router.refresh();
-      //   }
-    } catch {
-      setError("An error occurred. Please try again.");
+      const result = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        // More descriptive error messages based on the error type
+        if (result.error === "CredentialsSignin") {
+          setError(
+            "Invalid email or password. Please check your credentials and try again."
+          );
+        } else if (result.error.includes("email")) {
+          setError(
+            "The email address you entered is not registered. Please sign up first."
+          );
+        } else if (result.error.includes("password")) {
+          setError("The password you entered is incorrect. Please try again.");
+        } else {
+          setError("Invalid email or password. Please try again.");
+        }
+        setIsLoading(false);
+      } else if (result?.ok) {
+        router.push("/dashboard");
+        router.refresh();
+      }
+    } catch (_err) {
+      setError("An unexpected error occurred. Please try again later.");
       setIsLoading(false);
     }
   };
-
-  const handleGoogleSignIn = async () => {
+const handleGoogleSignIn = async () => {
     setIsLoading(true);
     setError(null);
 
@@ -119,7 +133,7 @@ export default function SignInForm() {
             type="password"
           />
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm mt-2">
               {error}
             </div>
           )}

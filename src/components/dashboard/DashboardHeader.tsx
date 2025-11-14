@@ -12,9 +12,30 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {Icon} from "@iconify/react";
+import {signOut} from "next-auth/react";
+// import {useRouter} from "next/navigation";
 
 export function DashboardHeader() {
   const [imageError, setImageError] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  // const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      // Sign out and redirect to signin page
+      await signOut({
+        redirect: true,
+        callbackUrl: "/signin",
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Force redirect even if signOut fails
+      window.location.href = "/signin";
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   return (
     <div className="bg-primary px-3 sm:px-4 md:px-6 py-3 sm:py-4 flex items-center justify-between rounded-b-xl">
@@ -59,8 +80,12 @@ export function DashboardHeader() {
             align="end"
             className="w-48 sm:w-56 cursor-pointer"
           >
-            <DropdownMenuItem className="w-48 sm:w-56 cursor-pointer hover:bg-white/10">
-              Log out
+            <DropdownMenuItem
+              className="w-48 sm:w-56 cursor-pointer hover:bg-white/10"
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+            >
+              {isLoggingOut ? "Logging out..." : "Log out"}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
