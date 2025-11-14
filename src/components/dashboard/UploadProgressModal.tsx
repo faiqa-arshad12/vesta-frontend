@@ -59,7 +59,7 @@ function CircularProgress({
         cy={size / 2}
         r={radius}
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="4"
         fill="none"
         className="text-gray-200"
       />
@@ -68,12 +68,12 @@ function CircularProgress({
         cy={size / 2}
         r={radius}
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="4"
         fill="none"
         strokeDasharray={circumference}
         strokeDashoffset={offset}
         strokeLinecap="round"
-        className="text-teal-600 transition-all duration-300"
+        className="text-primary transition-all duration-300"
       />
     </svg>
   );
@@ -204,7 +204,7 @@ export function UploadProgressModal({
                 {/* Loading Spinner */}
                 {file.progress < 100 && (
                   <div className="flex-shrink-0 text-teal-600">
-                    <CircularProgress progress={file.progress} size={28} />
+                    <CircularProgress progress={file.progress} size={36} />
                   </div>
                 )}
               </div>
@@ -214,15 +214,16 @@ export function UploadProgressModal({
 
         <DialogFooter className="flex-col sm:flex-row gap-2 sm:gap-3 px-0 sm:px-0">
           <Button
-            type="button"
             variant="outline"
             onClick={onCancel}
+            size={"lg"}
             className="w-full sm:w-auto px-4 sm:px-6 bg-transparent"
           >
             Cancel
           </Button>
           <Button
-            type="button"
+            variant={"default"}
+            size={"lg"}
             onClick={onNext}
             disabled={isUploading || overallProgress !== 100}
             className="w-full sm:w-auto gap-2 px-4 sm:px-6"
